@@ -17,12 +17,12 @@ const addUser = async (req, res, next) => {
 
 const loginUser =  async(req, res, next) => {
     const { email, password} = req.body;
-   const user = await User.find({where: { 'email': email, 'password': password }})
+   const user = await User.findAll({where: { 'email': email, 'password': password }});
 
-   if(user){
+   if(!user){
     return res.status(401).json({message: 'User Email or Password is Incorrect'});
    }
-   const token = await generateToken(user.id, user.name);
+   const token = await generateToken(user[0].id, user[0].name);
    return res.json({message: 'User Successfully Login', token: token});
 }
 

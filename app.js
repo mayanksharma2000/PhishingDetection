@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv  = require('dotenv');
+const cors = require('cors');
 
 dotenv.config();
 
@@ -8,6 +9,8 @@ const userRoutes = require('./routers/user');
 const phishingRoutes = require('./routers/phishingDetection');
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
 app.use('/user', userRoutes);
 app.use('/checkUrl', phishingRoutes);
