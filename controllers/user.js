@@ -12,7 +12,7 @@ const addUser = async (req, res, next) => {
         email: email,
         password: password
     });
-    return res.json(user);
+    return res.status(201).json(user);
 }
 
 const loginUser =  async(req, res, next) => {
@@ -22,7 +22,8 @@ const loginUser =  async(req, res, next) => {
    if(!user){
     return res.status(401).json({message: 'User Email or Password is Incorrect'});
    }
-   const token = await generateToken(user[0].id, user[0].name);
+   console.log(user);
+   const token = await generateToken(user[0]?.id, user[0]?.name);
    return res.json({message: 'User Successfully Login', token: token});
 }
 

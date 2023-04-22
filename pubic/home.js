@@ -1,3 +1,10 @@
+window.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    if(!token || token.length==0){
+        window.location.href = './Login/login.html';
+    }
+})
+
 async function checkUrl(e) {
     e.preventDefault();
     let urlDetails = {
@@ -25,5 +32,10 @@ async function checkUrl(e) {
         document.body.innerHTML += `<h1>Error: ${error.message}</h1>`;
         console.log(error);
     }
+}
+
+function logOut(){
+    localStorage.removeItem('token');
+    window.location.href = './Login/login.html';
 }
 
